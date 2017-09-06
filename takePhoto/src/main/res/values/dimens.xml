@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="select_preview_height">80dp</dimen>
+    <dimen name="takephoto_bottom_height">90dp</dimen>
+    <dimen name="title_bar_button">40dp</dimen>
+</resources>
