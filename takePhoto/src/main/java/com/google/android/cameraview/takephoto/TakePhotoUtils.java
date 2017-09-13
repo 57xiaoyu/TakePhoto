@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.os.Environment;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -28,6 +29,9 @@ public class TakePhotoUtils {
     public static String fileSavePath;
     private static Handler handler =new Handler();
 
+    public static void init(Context _context) {
+        init(_context,null);
+    }
     public static void init(Context _context, String _fileSavePath) {
         context = _context;
         fileSavePath = _fileSavePath;
@@ -54,6 +58,13 @@ public class TakePhotoUtils {
     }
 
     public static File getCameraOutputFoder() {
+        if(!TextUtils.isEmpty(fileSavePath)){
+            File file = new File(fileSavePath);
+            if(!file.exists()){
+                file.mkdirs();
+            }
+            return file;
+        }
         File dir;
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
             dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);

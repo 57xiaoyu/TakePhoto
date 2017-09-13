@@ -133,7 +133,6 @@ public class TakePhotoActivity extends Activity implements View.OnClickListener 
         bt_take_photo.setEnabled(true);
         iv_preview.setVisibility(View.GONE);
         mCameraView.addCallback(mPictureTakenCallback);
-
         //初始化
         mCurrentFlash = 0;
         iv_switch_flash.setImageResource(FLASH_ICONS[mCurrentFlash]);
