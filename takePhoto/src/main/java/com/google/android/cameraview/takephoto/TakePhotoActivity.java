@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -196,34 +197,66 @@ public class TakePhotoActivity extends Activity implements View.OnClickListener 
         //竖直方向
         if (newConfig.orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
             paramsRoot.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-            paramsRoot.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                paramsRoot.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            } else {
+                paramsRoot.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
+            }
             paramsRoot.height = (int) getResources().getDimension(R.dimen.takephoto_bottom_height);
             paramsRoot.width = ViewGroup.LayoutParams.MATCH_PARENT;
 
             paramsCancel.addRule(RelativeLayout.CENTER_VERTICAL);
             paramsCancel.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-            paramsCancel.removeRule(RelativeLayout.CENTER_HORIZONTAL);
-            paramsCancel.removeRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                paramsCancel.removeRule(RelativeLayout.CENTER_HORIZONTAL);
+                paramsCancel.removeRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+            }else {
+                paramsCancel.addRule(RelativeLayout.CENTER_HORIZONTAL, 0);
+                paramsCancel.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0);
+            }
+
 
             paramsConfirm.addRule(RelativeLayout.CENTER_VERTICAL);
             paramsConfirm.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-            paramsConfirm.removeRule(RelativeLayout.CENTER_HORIZONTAL);
-            paramsConfirm.removeRule(RelativeLayout.ALIGN_PARENT_TOP);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                paramsConfirm.removeRule(RelativeLayout.CENTER_HORIZONTAL);
+                paramsConfirm.removeRule(RelativeLayout.ALIGN_PARENT_TOP);
+            }else {
+                paramsConfirm.addRule(RelativeLayout.CENTER_HORIZONTAL, 0);
+                paramsConfirm.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
+            }
+
         } else {
             paramsRoot.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-            paramsRoot.removeRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                paramsRoot.removeRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+            }else {
+                paramsRoot.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0);
+            }
             paramsRoot.height = ViewGroup.LayoutParams.MATCH_PARENT;
             paramsRoot.width = (int) getResources().getDimension(R.dimen.takephoto_bottom_height);
 
             paramsCancel.addRule(RelativeLayout.CENTER_HORIZONTAL);
             paramsCancel.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-            paramsCancel.removeRule(RelativeLayout.CENTER_VERTICAL);
-            paramsCancel.removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                paramsCancel.removeRule(RelativeLayout.CENTER_VERTICAL);
+                paramsCancel.removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            }else {
+                paramsCancel.addRule(RelativeLayout.CENTER_VERTICAL, 0);
+                paramsCancel.addRule(RelativeLayout.ALIGN_PARENT_LEFT, 0);
+            }
+
 
             paramsConfirm.addRule(RelativeLayout.CENTER_HORIZONTAL);
             paramsConfirm.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-            paramsConfirm.removeRule(RelativeLayout.CENTER_VERTICAL);
-            paramsConfirm.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                paramsConfirm.removeRule(RelativeLayout.CENTER_VERTICAL);
+                paramsConfirm.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            }else {
+                paramsConfirm.addRule(RelativeLayout.CENTER_VERTICAL, 0);
+                paramsConfirm.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
+            }
+
         }
     }
 
